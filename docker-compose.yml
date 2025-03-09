@@ -1,4 +1,5 @@
 ---
+version: '3'
 services:
   freqtrade:
     image: freqtradeorg/freqtrade:stable
@@ -26,11 +27,36 @@ services:
     # Please read the https://www.freqtrade.io/en/stable/rest-api/ documentation
     # for more information.
     ports:
-      - "127.0.0.1:8080:8080"
+      - "8080:8080"
+    environment:
+      - EXCHANGE_USE_WEBSOCKET=false
+      - EXCHANGE_CCXT_WEBSOCKET_ENABLED=false
+      - EXCHANGE_CCXT_ASYNC_CONFIG_ENABLEWEBSOCKET=false
+      - EXCHANGE_CCXT_CONFIG_ENABLEWEBSOCKET=false
+      - EXCHANGE_MARKETS_CACHE_TTL=60
     # Default command used when running `docker compose up`
     command: >
       trade
       --logfile /freqtrade/user_data/logs/freqtrade.log
       --db-url sqlite:////freqtrade/user_data/tradesv3.sqlite
       --config /freqtrade/user_data/config.json
-      --strategy SampleStrategy
+      --strategy HiddenDivergenceMultiTimeframeStrategy
+
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   container_name: ollama
+  #   restart: unless-stopped
+  #   ports:
+  #     - "11434:11434"
+  #   volumes:
+  #     - ollama:/root/.ollama
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #           - driver: nvidia
+  #             count: all
+  #             capabilities: [gpu]
+
+# volumes:
+#   ollama:
