@@ -1,0 +1,186 @@
+{
+    "$schema": "https://schema.freqtrade.io/schema.json",
+    "max_open_trades": 5,
+    "stake_currency": "USDT",
+    "stake_amount": 100,
+    "tradable_balance_ratio": 0.95,
+    "fiat_display_currency": "USD",
+    "timeframe": "5m",
+    "dry_run": true,
+    "cancel_open_orders_on_exit": true,
+    "trading_mode": "futures",
+    "margin_mode": "isolated",
+    "unfilledtimeout": {
+        "entry": 10,
+        "exit": 10,
+        "exit_timeout_count": 3,
+        "unit": "minutes"
+    },
+    "entry_pricing": {
+        "price_side": "same",
+        "use_order_book": true,
+        "order_book_top": 1,
+        "price_last_balance": 0.0,
+        "check_depth_of_market": {
+            "enabled": true,
+            "bids_to_ask_delta": 1
+        }
+    },
+    "exit_pricing": {
+        "price_side": "other",
+        "use_order_book": true,
+        "order_book_top": 1,
+        "check_depth_of_market": {
+            "enabled": true,
+            "bids_to_ask_delta": 1
+        }
+    },
+    "exchange": {
+        "name": "binance",
+        "key": "",
+        "secret": "",
+        "ccxt_config": {
+            "enableRateLimit": true,
+            "rateLimit": 60,
+            "timeout": 30000,
+            "enableWebsocket": false,
+            "options": {
+                "defaultType": "future",
+                "adjustForTimeDifference": true,
+                "recvWindow": 10000,
+                "webApiType": "rest",
+                "createMarketBuyOrderRequiresPrice": false,
+                "defaultMarginMode": "isolated",
+                "leverage": 5,
+                "marginMode": "isolated",
+                "hedgeMode": false,
+                "reduceOnly": true
+            }
+        },
+        "ccxt_async_config": {
+            "enableRateLimit": true,
+            "rateLimit": 60,
+            "timeout": 30000,
+            "enableWebsocket": false,
+            "options": {
+                "defaultType": "future",
+                "adjustForTimeDifference": true,
+                "recvWindow": 10000,
+                "webApiType": "rest",
+                "createMarketBuyOrderRequiresPrice": false,
+                "defaultMarginMode": "isolated",
+                "leverage": 5,
+                "marginMode": "isolated",
+                "hedgeMode": false,
+                "reduceOnly": true
+            }
+        },
+        "pair_whitelist": [
+            "BTC/USDT:USDT",
+            "ETH/USDT:USDT",
+            "BNB/USDT:USDT",
+            "SOL/USDT:USDT",
+            "AVAX/USDT:USDT",
+            "MATIC/USDT:USDT",
+            "LINK/USDT:USDT",
+            "DOT/USDT:USDT",
+            "ADA/USDT:USDT",
+            "DOGE/USDT:USDT",
+            "XRP/USDT:USDT"
+        ],
+        "pair_blacklist": [
+            ".*DOWN/USDT.*",
+            ".*UP/USDT.*",
+            ".*BEAR/USDT.*",
+            ".*BULL/USDT.*"
+        ]
+    },
+    "pairlists": [
+        {
+            "method": "StaticPairList"
+        },
+        {
+            "method": "VolumePairList",
+            "number_assets": 20,
+            "sort_key": "quoteVolume",
+            "min_value": 0,
+            "refresh_period": 1800
+        },
+        {
+            "method": "AgeFilter",
+            "min_days_listed": 30
+        },
+        {
+            "method": "SpreadFilter",
+            "max_spread_ratio": 0.005
+        },
+        {
+            "method": "RangeStabilityFilter",
+            "lookback_days": 3,
+            "min_rate_of_change": 0.1,
+            "refresh_period": 1440
+        }
+    ],
+    "telegram": {
+        "enabled": true,
+        "token": "7927336104:AAFcLCGVvAX2bXjmglCg8TySpmb2uQrHtm8",
+        "chat_id": "90568994",
+        "notification_settings": {
+            "status": "on",
+            "warning": "on",
+            "startup": "on",
+            "entry": "on",
+            "entry_fill": "on",
+            "exit": "on",
+            "exit_fill": "on",
+            "entry_cancel": "on",
+            "exit_cancel": "on",
+            "protection_trigger": "on",
+            "protection_trigger_global": "on"
+        },
+        "reload": true,
+        "balance_dust_level": 0.01
+    },
+    "api_server": {
+        "enabled": true,
+        "listen_ip_address": "0.0.0.0",
+        "listen_port": 8080,
+        "verbosity": "error",
+        "enable_openapi": true,
+        "jwt_secret_key": "somethingrandom",
+        "CORS_origins": ["http://localhost:8080", "http://127.0.0.1:8080"],
+        "username": "freqtrader",
+        "password": "SuperSecurePassword"
+    },
+    "bot_name": "freqtrade",
+    "initial_state": "running",
+    "force_entry_enable": true,
+    "internals": {
+        "process_throttle_secs": 5
+    },
+    "strategy": "HiddenDivergenceMultiTimeframeStrategy",
+    "dry_run_wallet": 1000,
+    "order_types": {
+        "entry": "limit",
+        "exit": "market",
+        "emergency_exit": "market",
+        "force_exit": "market",
+        "force_entry": "market",
+        "stoploss": "market",
+        "stoploss_on_exchange": true,
+        "stoploss_on_exchange_interval": 60,
+        "stoploss_on_exchange_limit_ratio": 0.99
+    },
+    "order_time_in_force": {
+        "entry": "GTC",
+        "exit": "IOC"
+    },
+    "position_adjustment_enable": false,
+    "max_entry_position_adjustment": 0,
+    "use_exit_signal": true,
+    "emergency_exit": true,
+    "check_depth_of_market": {
+        "enabled": true,
+        "bids_to_ask_delta": 1
+    }
+}
