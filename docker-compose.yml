@@ -1,5 +1,5 @@
 ---
-version: '3'
+version: '3.8'
 services:
   freqtrade:
     image: freqtradeorg/freqtrade:stable
@@ -37,26 +37,27 @@ services:
     # Default command used when running `docker compose up`
     command: >
       trade
-      --logfile /freqtrade/user_data/logs/freqtrade.log
-      --db-url sqlite:////freqtrade/user_data/tradesv3.sqlite
+      --strategy AITradingStrategy
       --config /freqtrade/user_data/config.json
-      --strategy HiddenDivergenceMultiTimeframeStrategy
+      --logfile /freqtrade/user_data/logs/freqtrade.log
+    depends_on:
+      - ollama
 
-  # ollama:
-  #   image: ollama/ollama:latest
-  #   container_name: ollama
-  #   restart: unless-stopped
-  #   ports:
-  #     - "11434:11434"
-  #   volumes:
-  #     - ollama:/root/.ollama
-  #   deploy:
-  #     resources:
-  #       reservations:
-  #         devices:
-  #           - driver: nvidia
-  #             count: all
-  #             capabilities: [gpu]
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./ollama_data:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: unless-stopped
 
-# volumes:
-#   ollama:
+volumes:
+  ollama_data:

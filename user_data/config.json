@@ -81,12 +81,29 @@
             "BNB/USDT:USDT",
             "SOL/USDT:USDT",
             "AVAX/USDT:USDT",
-            "MATIC/USDT:USDT",
             "LINK/USDT:USDT",
             "DOT/USDT:USDT",
             "ADA/USDT:USDT",
             "DOGE/USDT:USDT",
-            "XRP/USDT:USDT"
+            "XRP/USDT:USDT",
+            "ATOM/USDT:USDT",
+            "UNI/USDT:USDT",
+            "AAVE/USDT:USDT",
+            "COMP/USDT:USDT",
+            "SUSHI/USDT:USDT",
+            "CRV/USDT:USDT",
+            "SNX/USDT:USDT",
+            "MKR/USDT:USDT",
+            "YFI/USDT:USDT",
+            "SAND/USDT:USDT",
+            "MANA/USDT:USDT",
+            "AXS/USDT:USDT",
+            "ENJ/USDT:USDT",
+            "CHZ/USDT:USDT",
+            "GRT/USDT:USDT",
+            "BAL/USDT:USDT",
+            "ZRX/USDT:USDT",
+            "ALGO/USDT:USDT"
         ],
         "pair_blacklist": [
             ".*DOWN/USDT.*",
@@ -101,9 +118,9 @@
         },
         {
             "method": "VolumePairList",
-            "number_assets": 20,
+            "number_assets": 28,
             "sort_key": "quoteVolume",
-            "min_value": 0,
+            "min_value": 1000000,
             "refresh_period": 1800
         },
         {
@@ -118,6 +135,13 @@
             "method": "RangeStabilityFilter",
             "lookback_days": 3,
             "min_rate_of_change": 0.1,
+            "refresh_period": 1440
+        },
+        {
+            "method": "VolatilityFilter",
+            "lookback_days": 3,
+            "min_volatility": 0.02,
+            "max_volatility": 0.75,
             "refresh_period": 1440
         }
     ],
@@ -158,7 +182,7 @@
     "internals": {
         "process_throttle_secs": 5
     },
-    "strategy": "HiddenDivergenceMultiTimeframeStrategy",
+    "strategy": "AITradingStrategy",
     "dry_run_wallet": 1000,
     "order_types": {
         "entry": "limit",
