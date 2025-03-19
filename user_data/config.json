@@ -1,8 +1,8 @@
 {
     "$schema": "https://schema.freqtrade.io/schema.json",
-    "max_open_trades": 5,
+    "max_open_trades": 10,
     "stake_currency": "USDT",
-    "stake_amount": 100,
+    "stake_amount": 10,
     "tradable_balance_ratio": 0.95,
     "fiat_display_currency": "USD",
     "timeframe": "5m",
@@ -79,31 +79,27 @@
             "BTC/USDT:USDT",
             "ETH/USDT:USDT",
             "BNB/USDT:USDT",
-            "SOL/USDT:USDT",
-            "AVAX/USDT:USDT",
-            "LINK/USDT:USDT",
-            "DOT/USDT:USDT",
-            "ADA/USDT:USDT",
-            "DOGE/USDT:USDT",
             "XRP/USDT:USDT",
+            "DOGE/USDT:USDT",
+            "SOL/USDT:USDT",
+            "ADA/USDT:USDT",
+            "LTC/USDT:USDT",
+            "DOT/USDT:USDT",
+            "LINK/USDT:USDT",
+            "AVAX/USDT:USDT",
+            "TRX/USDT:USDT",
+            "SHIB/USDT:USDT",
+            "S/USDT:USDT",
             "ATOM/USDT:USDT",
+            "NEAR/USDT:USDT",
+            "ALGO/USDT:USDT",
             "UNI/USDT:USDT",
-            "AAVE/USDT:USDT",
-            "COMP/USDT:USDT",
-            "SUSHI/USDT:USDT",
-            "CRV/USDT:USDT",
-            "SNX/USDT:USDT",
-            "MKR/USDT:USDT",
-            "YFI/USDT:USDT",
-            "SAND/USDT:USDT",
-            "MANA/USDT:USDT",
-            "AXS/USDT:USDT",
-            "ENJ/USDT:USDT",
-            "CHZ/USDT:USDT",
-            "GRT/USDT:USDT",
-            "BAL/USDT:USDT",
-            "ZRX/USDT:USDT",
-            "ALGO/USDT:USDT"
+            "ARB/USDT:USDT",
+            "OP/USDT:USDT",
+            "FIL/USDT:USDT",
+            "APT/USDT:USDT",
+            "SUI/USDT:USDT",
+            "SEI/USDT:USDT"
         ],
         "pair_blacklist": [
             ".*DOWN/USDT.*",
@@ -114,41 +110,45 @@
     },
     "pairlists": [
         {
-            "method": "StaticPairList"
+            "method": "StaticPairList",
+            "number_assets": 28,
+            "sort_key": "quoteVolume",
+            "min_value": 0,
+            "refresh_period": 1800
         },
         {
             "method": "VolumePairList",
             "number_assets": 28,
             "sort_key": "quoteVolume",
-            "min_value": 1000000,
+            "min_value": 0,
             "refresh_period": 1800
         },
         {
             "method": "AgeFilter",
-            "min_days_listed": 30
+            "min_days_listed": 14
         },
         {
             "method": "SpreadFilter",
-            "max_spread_ratio": 0.005
+            "max_spread_ratio": 0.008
         },
         {
             "method": "RangeStabilityFilter",
             "lookback_days": 3,
-            "min_rate_of_change": 0.1,
-            "refresh_period": 1440
+            "min_rate_of_change": 0.03,
+            "refresh_period": 1800
         },
         {
             "method": "VolatilityFilter",
             "lookback_days": 3,
-            "min_volatility": 0.02,
-            "max_volatility": 0.75,
-            "refresh_period": 1440
+            "min_volatility": 0.01,
+            "max_volatility": 0.8,
+            "refresh_period": 1800
         }
     ],
     "telegram": {
         "enabled": true,
         "token": "7927336104:AAFcLCGVvAX2bXjmglCg8TySpmb2uQrHtm8",
-        "chat_id": "90568994",
+        "chat_id": "-1002305796692",
         "notification_settings": {
             "status": "on",
             "warning": "on",
@@ -183,7 +183,9 @@
         "process_throttle_secs": 5
     },
     "strategy": "AITradingStrategy",
-    "dry_run_wallet": 1000,
+    "dry_run_wallet": 100,
+    "db_url": "sqlite:///user_data/tradesv3.sqlite",
+    "db_backup_dir": "user_data/database_backup/",
     "order_types": {
         "entry": "limit",
         "exit": "market",
